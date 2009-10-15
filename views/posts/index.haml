@@ -1,9 +1,9 @@
-- if @posts
+- unless @posts.empty?
   %ul
     - @posts.each do |post|
       %li
         %a{:href => "/post/#{post.id}"}= post.title
 - else
-  No posts!
+  %p No posts!
 
 %a{:href => '/post/new'}New Post
