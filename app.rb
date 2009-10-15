@@ -16,15 +16,17 @@ end
   end
 end
 
-get '/posts/:id' do
-  @post = Post.find(:first, :conditions => { :_id => params[:id] })
-  haml :"posts/show"
-end
-
-get '/posts/new' do
+get '/post/new' do
   haml :"posts/new"
 end
 
-post '/posts/new' do
-  
+post '/post/new' do
+  params.each_pair do |key, value|
+    puts "#{key} => #{value}"
+  end
+end
+
+get '/post/:id' do
+  @post = Post.find(:first, :conditions => { :_id => params[:id] })
+  haml :"posts/show"
 end
