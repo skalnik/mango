@@ -1,1 +1,7 @@
-posts
+- if @posts
+  %ul
+    - @posts.each do |post|
+      %li
+        %a{:href => "/posts/#{post.id}"}= post.title
+- else
+  No posts!
