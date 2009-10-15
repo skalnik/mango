@@ -5,13 +5,15 @@ require 'haml'
 Dir['models/*'].each { |model| require model }
 
 configure do
-  MongoMapper.connection = XGen::Mongo::Driver::Connection.new('localhost:26818')
+  MongoMapper.connection = XGen::Mongo::Driver::Connection.new('localhost')
   MongoMapper.database = 'mango'
 end
 
-get '/' do
-  @posts = Post.find(:all)
-  haml :"posts/index"
+['/', '/posts'].each do |path|
+  get path do
+    @posts = Post.find(:all)
+    haml :"posts/index"
+  end
 end
 
 get '/posts/new' do
