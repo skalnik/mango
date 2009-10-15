@@ -16,6 +16,11 @@ end
   end
 end
 
+get '/posts/:id' do
+  @post = Post.find(:first, :conditions => { :_id => params[:id] })
+  haml :"posts/show"
+end
+
 get '/posts/new' do
   haml :"posts/new"
 end
