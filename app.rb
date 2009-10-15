@@ -21,7 +21,7 @@ get '/post/new' do
 end
 
 post '/post/new' do
-  post = Post.create({:title => params[:title], :body => params[:body]})
+  post = Post.create(params)
   redirect "/post/#{post.id}"
 end
 
