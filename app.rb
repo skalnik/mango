@@ -21,9 +21,8 @@ get '/post/new' do
 end
 
 post '/post/new' do
-  params.each_pair do |key, value|
-    puts "#{key} => #{value}"
-  end
+  post = Post.create({:title => params[:title], :body => params[:body]})
+  redirect "/post/#{post.id}"
 end
 
 get '/post/:id' do
