@@ -11,7 +11,7 @@ end
 
 ['/', '/posts'].each do |path|
   get path do
-    @posts = Post.find(:all)
+    @posts = Post.find(:all, :order => 'created_at DESC')
     haml :"posts/index"
   end
 end
