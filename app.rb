@@ -36,6 +36,21 @@ get '/post/:id' do
   haml :"posts/show"
 end
 
+get '/post/:id/edit' do
+  @post = Post.find(params[:id])
+  haml :"posts/edit"
+end
+
+post '/post/:id/edit' do
+  @post = Post.find(params[:id])
+  @post.update_attributes(params[:post])
+end
+
+post '/post/:id/delete' do
+  @post = Post.find(params[:id])
+  @post.destroy
+end
+
 post '/post/:post_id/comment/new' do
   post_id = params['post_id']
   params['post_id'] = nil
