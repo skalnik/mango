@@ -33,7 +33,8 @@ get '/post/:id' do
 end
 
 post '/post/:post_id/comment/new' do
-  p params
-  comment = Post.first(:_id => params[:post_id]).comments << Comment.create(params)
-  redirect "/post/#{params[:post_id]}"
+  post_id = params['post_id']
+  params['post_id'] = nil
+  comment = Post.first(:_id => post_id).comments << Comment.create(params)
+  redirect "/post/#{post_id}"
 end
