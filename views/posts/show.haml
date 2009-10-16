@@ -21,4 +21,5 @@
     %textarea{:name => 'body', :id => 'body', :rows => '12', :cols => '40'}
   %p
     %input{:type => 'submit'}
+%a{:href => "/post/#{@post.id}/delete", :method => 'post'} Delete
 %a{:href => '/'} Home
