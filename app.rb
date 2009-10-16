@@ -26,6 +26,7 @@ end
 post '/post/new' do
   post = Post.create(params)
   post.rendered = RedCloth.new(post.body).to_html
+  post.tags = post.tags_list.gsub(/ /, "").downcase.split(",")
   post.save!
   redirect "/post/#{post.id}"
 end
