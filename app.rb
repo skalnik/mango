@@ -3,6 +3,7 @@ require 'sinatra'
 require 'mongomapper'
 require 'haml'
 require 'yaml'
+require 'RedCloth'
 Dir['models/*'].each { |model| require model }
 
 configure do
@@ -24,6 +25,8 @@ end
 
 post '/post/new' do
   post = Post.create(params)
+  post.rendered = RedCloth.new(post.body).to_html
+  post.save!
   redirect "/post/#{post.id}"
 end
 

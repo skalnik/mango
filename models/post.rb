@@ -3,6 +3,7 @@ class Post
   
   key :title, String
   key :body, String
+  key :rendered, String
   timestamps!
 
   has_many :comments
