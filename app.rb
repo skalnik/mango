@@ -2,11 +2,13 @@ require 'rubygems'
 require 'sinatra'
 require 'mongomapper'
 require 'haml'
+require 'yaml'
 Dir['models/*'].each { |model| require model }
 
 configure do
-  MongoMapper.connection = XGen::Mongo::Driver::Connection.new('localhost')
-  MongoMapper.database = 'mango'
+  config = YAML::load(File.open('config.yml'))
+  MongoMapper.connection = XGen::Mongo::Driver::Connection.new(config['host'])
+  MongoMapper.database = config['database']
 end
 
 ['/', '/posts'].each do |path|
