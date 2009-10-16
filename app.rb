@@ -13,7 +13,7 @@ end
 
 ['/', '/posts'].each do |path|
   get path do
-    @posts = Post.find(:all, :order => 'created_at DESC')
+    @posts = Post.all( :order => 'created_at DESC' )
     haml :"posts/index"
   end
 end
@@ -28,13 +28,13 @@ post '/post/new' do
 end
 
 get '/post/:id' do
-  @post = Post.find(:first, :conditions => { :_id => params[:id] })
+  @post = Post.find(params[:id])
   haml :"posts/show"
 end
 
 post '/post/:post_id/comment/new' do
   post_id = params['post_id']
   params['post_id'] = nil
-  comment = Post.first(:_id => post_id).comments << Comment.create(params)
+  comment = Post.find(post_id).comments << Comment.create(params)
   redirect "/post/#{post_id}"
 end
