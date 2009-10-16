@@ -1,9 +1,9 @@
-class Post
+class Comment
   include MongoMapper::Document
   
-  key :title, String
+  key :author, String
   key :body, String
   timestamps!
 
-  has_many :comments
+  belongs_to :post
 end

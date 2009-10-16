@@ -31,3 +31,9 @@ get '/post/:id' do
   @post = Post.find(:first, :conditions => { :_id => params[:id] })
   haml :"posts/show"
 end
+
+post '/post/:post_id/comment/new' do
+  p params
+  comment = Post.first(:_id => params[:post_id]).comments << Comment.create(params)
+  redirect "/post/#{params[:post_id]}"
+end

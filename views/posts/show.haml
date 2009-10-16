@@ -1,5 +1,22 @@
 %h2= @post.title
 = @post.body
 
-%br/
+%h3 Comments
+- unless @post.comments.empty?
+  - @post.comments.each do |comment|
+    %p
+      =comment.author
+      said
+      %br/
+      =comment.body
+%form{:action => "/post/#{@post.id}/comment/new", :method => 'post'}
+  %p
+    %label{:for => 'author'}Author:
+    %input{:name => 'author', :id => 'author'}
+  %p
+    %label{:for => 'body'}Body:
+    %br/
+    %textarea{:name => 'body', :id => 'body', :rows => '12', :cols => '40'}
+  %p
+    %input{:type => 'submit'}
 %a{:href => '/'} Home
