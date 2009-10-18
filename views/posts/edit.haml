@@ -1,0 +1,15 @@
+%form{:action => '/post/edit', :method => 'post'}
+  %p
+    %label{:for => 'title'}Title: 
+    %input{:name => 'title', :id => 'title', :value => @post.title}
+  %p
+    %label{:for => 'tags_list'}Tags:
+    %input{:name => 'tags_list', :id => 'tags_list', :value => @post.tags_list}
+  %p
+    %label{:for => 'body'}Body:
+    %br/
+    = find_and_preserve do
+      %textarea{:name => 'body', :id => 'body', :rows => '12', :cols => '40'}= @post.body
+  %p
+    %input{:type => 'submit'}
+%a{:href => "/post/#{@post.id}"} Back
