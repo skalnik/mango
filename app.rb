@@ -41,12 +41,18 @@ get '/post/:id/edit' do
   haml :"posts/edit"
 end
 
-post '/post/:id/edit' do
-  @post = Post.find(params[:id])
-  @post.update_attributes(params[:post])
+post '/post/edit' do
+  #@post = Post.find(params[:id])
+  @post = Post.find_by_title(params[:title])
+  @post.update_attributes(params)
+  @post.rendered = RedCloth.new(params[:body]).to_html
+  @post.tags_list = params[:tags_list].gsub(/ /, "").downcase
+  @post.tags = @post.tags_list.split(",")
+  @post.save!
+  redirect "/post/#{@post.id}"
 end
 
-post '/post/:id/delete' do
+post '/post/delete' do
   @post = Post.find(params[:id])
   @post.destroy
 end
