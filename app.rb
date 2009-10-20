@@ -24,12 +24,9 @@ get '/post/new' do
 end
 
 post '/post/new' do
-  post = Post.create(params)
-  post.rendered = RedCloth.new(post.body).to_html
-  post.tags_list = post.tags_list.gsub(/ /, "").downcase
-  post.tags = post.tags_list.split(",")
-  post.save!
-  redirect "/post/#{post.id}"
+  @post = Post.create(params)
+  cleanup @post
+  redirect "/post/#{@post.id}"
 end
 
 get '/post/:id' do
@@ -45,10 +42,7 @@ end
 post '/post/edit' do
   @post = Post.find(params[:id])
   @post.update_attributes(params)
-  @post.rendered = RedCloth.new(params[:body]).to_html
-  @post.tags_list = params[:tags_list].gsub(/ /, "").downcase
-  @post.tags = @post.tags_list.split(",")
-  @post.save!
+  cleanup @post
   redirect "/post/#{@post.id}"
 end
 
@@ -62,4 +56,11 @@ post '/post/:post_id/comment/new' do
   params['post_id'] = nil
   comment = Post.find(post_id).comments << Comment.create(params)
   redirect "/post/#{post_id}"
+end
+
+def cleanup(post)
+  post.rendered = RedCloth.new(post.body).to_html
+  post.tags_list = post.tags_list.gsub(/ /, "").downcase
+  post.tags = post.tags_list.split(",")
+  post.save!
 end
