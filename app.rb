@@ -43,8 +43,7 @@ get '/post/:id/edit' do
 end
 
 post '/post/edit' do
-  #@post = Post.find(params[:id])
-  @post = Post.find_by_title(params[:title])
+  @post = Post.find(params[:id])
   @post.update_attributes(params)
   @post.rendered = RedCloth.new(params[:body]).to_html
   @post.tags_list = params[:tags_list].gsub(/ /, "").downcase
