@@ -46,11 +46,6 @@ post '/post/edit' do
   redirect "/post/#{@post.id}"
 end
 
-post '/post/delete' do
-  @post = Post.find(params[:id])
-  @post.destroy
-end
-
 post '/post/:post_id/comment/new' do
   post_id = params['post_id']
   params['post_id'] = nil
