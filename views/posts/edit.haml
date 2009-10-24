@@ -1,4 +1,5 @@
-%form{:action => '/post/edit', :method => 'post'}
+%form{:action => "/post/#{@post.id}", :method => 'post'}
+  %input{:type => 'hidden', :name => '_method', :value => 'put'}
   %p
     %label{:for => 'title'}Title: 
     %input{:name => 'title', :id => 'title', :value => @post.title}
@@ -10,7 +11,6 @@
     %br/
     = find_and_preserve do
       %textarea{:name => 'body', :id => 'body', :rows => '12', :cols => '40'}= @post.body
-  %input{:name => 'id', :type => 'hidden', :id => 'id', :value => @post.id}
   %p
     %input{:type => 'submit'}
 %a{:href => "/post/#{@post.id}"} Back

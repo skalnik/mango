@@ -39,7 +39,7 @@ get '/posts/:id/edit' do
   haml :"posts/edit"
 end
 
-post '/post/edit' do
+put '/posts/:id' do
   @post = Post.find(params[:id])
   @post.update_attributes(params)
   cleanup @post
