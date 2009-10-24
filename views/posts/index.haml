@@ -3,6 +3,7 @@
     - @posts.each do |post|
       %li
         %a{:href => "/posts/#{post.id}"}= post.title
+        %a{:href => "/posts/#{post.id}", :onclick => "var f = document.createElement('form');f.style.display = 'none';this.parentNode.appendChild(f);f.method = 'post';f.action = this.href;var m = document.createElement('input');m.setAttribute('type', 'hidden');m.setAttribute('name', '_method');m.setAttribute('value', 'delete');f.appendChild(m);f.submit();return false;"} Delete
 - else
   %p No posts!
 

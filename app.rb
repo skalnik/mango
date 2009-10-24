@@ -34,6 +34,12 @@ get '/posts/:id' do
   haml :"posts/show"
 end
 
+delete '/posts/:id' do
+  @post = Post.find(params[:id])
+  @post.destroy
+  redirect '/posts'
+end
+
 get '/posts/:id/edit' do
   @post = Post.find(params[:id])
   haml :"posts/edit"
