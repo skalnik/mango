@@ -47,10 +47,8 @@ put '/posts/:id' do
 end
 
 post '/posts/:post_id/comments' do
-  post_id = params['post_id']
-  params['post_id'] = nil
-  comment = Post.find(post_id).comments << Comment.create(params)
-  redirect "/post/#{post_id}"
+  Comment.create(params)
+  redirect "/post/#{params[:post_id]}"
 end
 
 def cleanup(post)
