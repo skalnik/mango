@@ -46,7 +46,7 @@ put '/posts/:id' do
   redirect "/post/#{@post.id}"
 end
 
-post '/posts/:post_id/comments/new' do
+post '/posts/:post_id/comments' do
   post_id = params['post_id']
   params['post_id'] = nil
   comment = Post.find(post_id).comments << Comment.create(params)

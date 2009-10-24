@@ -12,7 +12,7 @@
       said
       %br/
       =comment.body
-%form{:action => "/post/#{@post.id}/comment/new", :method => 'post'}
+%form{:action => "/posts/#{@post.id}/comments", :method => 'post'}
   %p
     %label{:for => 'author'}Author:
     %input{:name => 'author', :id => 'author'}
