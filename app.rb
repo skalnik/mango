@@ -19,22 +19,22 @@ end
   end
 end
 
-get '/post/new' do
+get '/posts/new' do
   haml :"posts/new"
 end
 
-post '/post/new' do
+post '/posts/new' do
   @post = Post.create(params)
   cleanup @post
   redirect "/post/#{@post.id}"
 end
 
-get '/post/:id' do
+get '/posts/:id' do
   @post = Post.find(params[:id])
   haml :"posts/show"
 end
 
-get '/post/:id/edit' do
+get '/posts/:id/edit' do
   @post = Post.find(params[:id])
   haml :"posts/edit"
 end
@@ -46,7 +46,7 @@ post '/post/edit' do
   redirect "/post/#{@post.id}"
 end
 
-post '/post/:post_id/comment/new' do
+post '/posts/:post_id/comments/new' do
   post_id = params['post_id']
   params['post_id'] = nil
   comment = Post.find(post_id).comments << Comment.create(params)
