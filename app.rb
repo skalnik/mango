@@ -23,7 +23,7 @@ get '/posts/new' do
   haml :"posts/new"
 end
 
-post '/posts/new' do
+post '/posts/' do
   @post = Post.create(params)
   cleanup @post
   redirect "/post/#{@post.id}"
