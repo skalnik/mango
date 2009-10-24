@@ -26,7 +26,7 @@ end
 post '/posts/' do
   @post = Post.create(params)
   cleanup @post
-  redirect "/post/#{@post.id}"
+  redirect "/posts/#{@post.id}"
 end
 
 get '/posts/:id' do
@@ -43,12 +43,12 @@ put '/posts/:id' do
   @post = Post.find(params[:id])
   @post.update_attributes(params)
   cleanup @post
-  redirect "/post/#{@post.id}"
+  redirect "/posts/#{@post.id}"
 end
 
 post '/posts/:post_id/comments' do
   Comment.create(params)
-  redirect "/post/#{params[:post_id]}"
+  redirect "/posts/#{params[:post_id]}"
 end
 
 def cleanup(post)
