@@ -1,4 +1,4 @@
-%form{:action => "/post/#{@post.id}", :method => 'post'}
+%form{:action => "/posts/#{@post.id}", :method => 'post'}
   %input{:type => 'hidden', :name => '_method', :value => 'put'}
   %p
     %label{:for => 'title'}Title: 
@@ -13,4 +13,4 @@
       %textarea{:name => 'body', :id => 'body', :rows => '12', :cols => '40'}= @post.body
   %p
     %input{:type => 'submit'}
-%a{:href => "/post/#{@post.id}"} Back
+%a{:href => "/posts/#{@post.id}"} Back

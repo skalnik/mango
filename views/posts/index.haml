@@ -2,8 +2,8 @@
   %ul
     - @posts.each do |post|
       %li
-        %a{:href => "/post/#{post.id}"}= post.title
+        %a{:href => "/posts/#{post.id}"}= post.title
 - else
   %p No posts!
 
-%a{:href => '/post/new'}New Post
+%a{:href => '/posts/new'}New Post
