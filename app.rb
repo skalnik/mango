@@ -12,6 +12,15 @@ configure do
   MongoMapper.database = config['database']
 end
 
+helpers do
+  def cleanup(post)
+    post.rendered = RedCloth.new(post.body).to_html
+    post.tags_list = post.tags_list.gsub(/ /, "").downcase
+    post.tags = post.tags_list.split(",")
+    post.save!
+  end
+end
+
 ['/', '/posts'].each do |path|
   get path do
     @posts = Post.all( :order => 'created_at DESC' )
@@ -55,11 +64,4 @@ end
 post '/posts/:post_id/comments' do
   Comment.create(params)
   redirect "/posts/#{params[:post_id]}"
-end
-
-def cleanup(post)
-  post.rendered = RedCloth.new(post.body).to_html
-  post.tags_list = post.tags_list.gsub(/ /, "").downcase
-  post.tags = post.tags_list.split(",")
-  post.save!
 end
