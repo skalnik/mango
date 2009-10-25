@@ -8,8 +8,8 @@ Dir['models/*'].each { |model| require model }
 
 configure do
   config = YAML::load(File.open('config.yml'))
-  MongoMapper.connection = XGen::Mongo::Driver::Connection.new(config['host'])
-  MongoMapper.database = config['database']
+  MongoMapper.connection = XGen::Mongo::Driver::Connection.new(config['database']['host'])
+  MongoMapper.database = config['database']['name']
 end
 
 helpers do

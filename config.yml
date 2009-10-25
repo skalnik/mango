@@ -1,2 +1,3 @@
-host: localhost
-database: mango
+database:
+  host: localhost
+  name: mango
