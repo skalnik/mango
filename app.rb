@@ -63,6 +63,13 @@ put '/posts/:id' do
   redirect "/posts/#{@post.id}"
 end
 
+get '/posts/tags/:tags' do
+  @tags = params[:tags]
+  @tags = @tags.split(',') if @tags =~ /,/
+  @posts = Post.all( :conditions => { :tags => @tags }, :order => 'created_at desc' )
+  haml :"posts/tags"
+end
+
 post '/posts/:post_id/comments' do
   @comment = Comment.create(params)
   cleanup @comment

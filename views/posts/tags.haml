@@ -1,0 +1,14 @@
+- unless @posts.empty?
+  - if @tags.is_a?(Array)
+    %h3= "Posts about #{@tags.map {|t| t.capitalize }.join(' or ')}"
+  - else
+    %h3= "Posts about #{@tags.capitalize}"
+  %ul
+    - @posts.each do |post|
+      %li
+        %a{:href => "/posts/#{post.id}"}= post.title
+        %a{:href => "/posts/#{post.id}", :onclick => "var f = document.createElement('form');f.style.display = 'none';this.parentNode.appendChild(f);f.method = 'post';f.action = this.href;var m = document.createElement('input');m.setAttribute('type', 'hidden');m.setAttribute('name', '_method');m.setAttribute('value', 'delete');f.appendChild(m);f.submit();return false;"} Delete
+- else
+  %p No posts!
+
+%a{:href => '/posts/new'}New Post
