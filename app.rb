@@ -13,11 +13,13 @@ configure do
 end
 
 helpers do
-  def cleanup(post)
-    post.rendered = RedCloth.new(post.body).to_html
-    post.tags_list = post.tags_list.gsub(/ /, "").downcase
-    post.tags = post.tags_list.split(",")
-    post.save!
+  def cleanup(obj)
+    obj.rendered = RedCloth.new(obj.body).to_html
+    if obj.is_a?(Post)
+      obj.tags_list = obj.tags_list.gsub(/ /, "").downcase
+      obj.tags = obj.tags_list.split(",")
+    end
+    obj.save!
   end
 end
 
@@ -62,6 +64,7 @@ put '/posts/:id' do
 end
 
 post '/posts/:post_id/comments' do
-  Comment.create(params)
+  @comment = Comment.create(params)
+  cleanup @comment
   redirect "/posts/#{params[:post_id]}"
 end

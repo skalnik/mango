@@ -3,6 +3,7 @@ class Comment
   
   key :author, String
   key :body, String
+  key :rendered, String
   timestamps!
 
   belongs_to :post

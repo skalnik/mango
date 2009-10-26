@@ -11,7 +11,7 @@
       =comment.author
       said
       %br/
-      =comment.body
+      =comment.rendered
 %form{:action => "/posts/#{@post.id}/comments", :method => 'post'}
   %p
     %label{:for => 'author'}Author:
