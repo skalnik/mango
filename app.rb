@@ -7,7 +7,7 @@ require 'RedCloth'
 Dir['models/*'].each { |model| require model }
 
 configure do
-  config = YAML::load(File.open('config.yml'))
+  config = YAML::load_file('config.yml')
   MongoMapper.connection = XGen::Mongo::Driver::Connection.new(config['database']['host'])
   MongoMapper.database = config['database']['name']
 end
